@@ -4,6 +4,5 @@
     <HomeLogos />
     <HomeFeatures />
     <HomeStats />
-    <HomeCta />
   </div>
 </template>
