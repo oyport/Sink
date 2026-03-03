@@ -97,18 +97,7 @@ const { stats } = useGithubStats()
                   variant="outline"
                   size="sm"
                 >
-                  <a
-                    :href="github"
-                    target="_blank"
-                    :title="$t('layouts.footer.social.github')"
-                    class="flex items-center gap-1.5"
-                  >
-                    <GitHubIcon class="size-4" />
-                    <Star class="size-3" />
-                    <span class="tabular-nums">{{ stats.stars }}</span>
-                  </a>
                 </Button>
-
                 <SwitchLanguage />
                 <SwitchTheme />
               </div>
@@ -199,20 +188,6 @@ const { stats } = useGithubStats()
               "
             >
               <TelegramIcon class="size-6" />
-            </a>
-            <a
-              v-if="github"
-              :href="github"
-              target="_blank"
-              rel="noopener noreferrer"
-              :title="$t('layouts.footer.social.github')"
-              aria-label="GitHub"
-              class="
-                block text-muted-foreground
-                hover:text-primary
-              "
-            >
-              <GitHubIcon class="size-6" />
             </a>
           </div>
         </div>
