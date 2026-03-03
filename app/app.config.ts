@@ -3,7 +3,7 @@ export default defineAppConfig({
   github: 'https://github.com/miantiao-me/sink',
   coffee: 'https://to.td/coffee',
   twitter: 'https://to.td/x',
-  telegram: 'https://sink.cool/telegram',
+  telegram: 'https://to.td/telegram',
   description: 'To.cd is a concise and efficient URL shortening service platform that provides fast, secure, and stable link shortening services, supporting features like custom short links, data statistics, and QR code generation, 100% run on Cloudflare.',
   image: 'https://sink.cool/banner.png',
   previewTTL: 300, // 5 minutes
