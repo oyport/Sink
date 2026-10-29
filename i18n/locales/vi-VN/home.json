@@ -3,6 +3,25 @@
     "hero": {
       "github_repo": "Kho GitHub"
     },
+    "guest_links": {
+      "title": "Tạo liên kết rút gọn",
+      "description": "Dán URL đích để tạo liên kết rút gọn có thể chia sẻ.",
+      "url_label": "URL đích",
+      "url_placeholder": "https://example.com",
+      "create": "Tạo liên kết rút gọn",
+      "creating": "Đang tạo…",
+      "complete_challenge": "Vui lòng hoàn tất bước kiểm tra bảo mật để tiếp tục.",
+      "challenge_error": "Không tải được bước kiểm tra bảo mật. Hãy tải lại trang và thử lại.",
+      "short_link": "Liên kết rút gọn của bạn",
+      "copy": "Sao chép liên kết",
+      "copied": "Đã sao chép liên kết",
+      "copy_failed": "Không thể sao chép liên kết rút gọn.",
+      "daily_limit": "Bạn đã đạt giới hạn tạo liên kết hôm nay cho IP này. Hãy thử lại vào ngày mai.",
+      "global_limit": "Sức chứa liên kết dành cho khách hiện đã đầy.",
+      "failed": "Không thể tạo liên kết rút gọn. Vui lòng thử lại.",
+      "expires_in": "Liên kết này hết hạn sau {days} ngày.",
+      "never_expires": "Liên kết này không hết hạn."
+    },
     "features": {
       "title": "Tính năng",
       "subtitle": "Đơn giản và đủ dùng",

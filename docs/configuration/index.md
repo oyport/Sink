@@ -69,7 +69,7 @@ Also bind `ANALYTICS`. Add `R2` for [backups](/features/backups), `AI` for [Work
 
 ## Public overrides (only if you change defaults)
 
-On Workers, set the same value in Builds and runtime. On Pages, set once, then redeploy.
+On Workers, set the same value in Builds and runtime. On Pages, set once, then redeploy. The guest-link settings are read from a runtime endpoint, so they can be changed in Worker Runtime without rebuilding the UI.
 
 | Variable                          | Default | Purpose                                                                                            |
 | --------------------------------- | ------- | -------------------------------------------------------------------------------------------------- |
@@ -79,8 +79,11 @@ On Workers, set the same value in Builds and runtime. On Pages, set once, then r
 | `NUXT_PUBLIC_MAX_URL_LENGTH`      | `16384` | Maximum target URL length in characters (256-24000)                                                |
 | `NUXT_PUBLIC_HOME_URL`            | empty   | Non-empty URL redirects `/`; empty shows the Sink homepage                                         |
 | `NUXT_PUBLIC_LINK_PROXY_ENABLED`  | `false` | `true` allows links to opt into reverse proxy mode; off, stored proxy links fall back to redirects |
+| `NUXT_PUBLIC_GUEST_LINKS_ENABLED` | `false` | `true` enables Turnstile-protected visitor link creation                                           |
+| `NUXT_PUBLIC_GUEST_LINK_PREFIX`   | `u`     | Visitor links use `/<prefix>/<slug>`; the default is `/u/<slug>`                                   |
+| `NUXT_PUBLIC_TURNSTILE_SITE_KEY`  | empty   | Public Cloudflare Turnstile site key; required to enable visitor link creation                     |
 
-`NUXT_PUBLIC_*` values are baked into the built UI and read at runtime, so changes need a rebuild before the client picks them up.
+Other `NUXT_PUBLIC_*` values are baked into the built UI and read at runtime, so changes need a rebuild before the client picks them up.
 
 `NUXT_HOME_URL` is the deprecated name of `NUXT_PUBLIC_HOME_URL`. It still works, but rename it when you next change your settings.
 
@@ -106,6 +109,12 @@ Click analytics store the target URL in Workers Analytics Engine, which limits a
 | `NUXT_SAFE_BROWSING_DOH`                            | DNS-over-HTTPS URL used to check unsafe domains when `unsafe` is not set |
 | `NUXT_WEBHOOK_URL`                                  | HTTP(S) URL for [click webhooks](./webhooks)                             |
 | `NUXT_WEBHOOK_SECRET`                               | Optional signing secret starting with `whsec_`                           |
+| `NUXT_GUEST_LINK_PREFIX_ALIASES`                    | Comma-separated previous visitor prefixes kept working after a prefix change |
+| `NUXT_GUEST_LINK_DAILY_LIMIT_PER_IP`                 | Successful visitor links allowed per IP each UTC day; default `10`      |
+| `NUXT_GUEST_LINK_GLOBAL_LIMIT`                       | Maximum active visitor links across the instance; default `10000`        |
+| `NUXT_GUEST_LINK_EXPIRATION_DAYS`                    | Visitor link lifetime in days; default `180`, `0` means no expiry        |
+| `NUXT_GUEST_LINK_CLEANUP_DAYS`                       | Days to keep expired visitor links before deletion; default `7`, `0` means next cron run |
+| `NUXT_TURNSTILE_SECRET`                              | Encrypted Turnstile secret key; required to enable visitor link creation |
 
 Safe browsing example: Cloudflare Family DNS `https://family.cloudflare-dns.com/dns-query`. See also [Link Features](/features/links).
 
@@ -114,6 +123,16 @@ Safe browsing example: Cloudflare Family DNS `https://family.cloudflare-dns.com/
 Set runtime variable `NUXT_EXPIRED_LINK_RETENTION_DAYS=30` to permanently delete D1 links once they have been expired for 30 days. Unset or empty disables cleanup. Only non-negative integers are accepted; `0` deletes expired links on the next run. Invalid values skip cleanup and log a warning.
 
 Cleanup requires a completed KV-to-D1 migration and Workers cron (daily at **00:00 UTC** in this repository). It runs independently of `NUXT_DISABLE_AUTO_BACKUP` and does not require R2. Pages does not run automatic cleanup. Existing R2 backups are retained.
+
+### Visitor link limits and cleanup
+
+The homepage visitor form is disabled by default. Create a Turnstile widget and set `NUXT_PUBLIC_TURNSTILE_SITE_KEY` plus encrypted `NUXT_TURNSTILE_SECRET`, then set `NUXT_PUBLIC_GUEST_LINKS_ENABLED=true`. Turnstile tokens are verified by the server before a link is created. Visitor links use the configurable `/u/` path segment, receive the `guest` tag, and remain manageable from the dashboard. The site key is public; the secret must remain encrypted.
+
+`NUXT_GUEST_LINK_DAILY_LIMIT_PER_IP=10` limits successful creations per client IP per UTC day. IP addresses are stored only as keyed daily hashes. `NUXT_GUEST_LINK_GLOBAL_LIMIT=10000` caps active visitor links; expired links free capacity. The defaults are conservative and can be adjusted for your expected traffic.
+
+`NUXT_GUEST_LINK_EXPIRATION_DAYS=180` sets the default lifetime for newly created visitor links. Set it to `0` for links without an expiry. `NUXT_GUEST_LINK_CLEANUP_DAYS=7` permanently deletes expired visitor links after the grace period. Cleanup runs on the existing Workers cron schedule after a completed KV-to-D1 migration. Pages deployments do not run this scheduled cleanup. The general `NUXT_EXPIRED_LINK_RETENTION_DAYS` setting remains separate and applies to all expired links.
+
+If you change `NUXT_PUBLIC_GUEST_LINK_PREFIX`, add the previous value to `NUXT_GUEST_LINK_PREFIX_ALIASES` so already shared visitor links keep working. Prefixes must be a single alphanumeric or hyphenated path segment and cannot use reserved application paths.
 
 ## Advanced defaults (usually leave alone)
 

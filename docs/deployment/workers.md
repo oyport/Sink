@@ -53,6 +53,23 @@ Under **Settings → Variables and Secrets**, add:
 | `NUXT_CF_ACCOUNT_ID` | Variable         | Recommended for analytics                                                                        |
 | `NUXT_CF_API_TOKEN`  | Encrypted secret | Recommended for analytics                                                                        |
 
+To enable visitor link creation on the homepage, create a [Cloudflare Turnstile widget](https://developers.cloudflare.com/turnstile/get-started/) for your domain, then add these **runtime** variables and secrets:
+
+| Variable                              | Type             | Default | Purpose                                                       |
+| ------------------------------------- | ---------------- | ------- | ------------------------------------------------------------- |
+| `NUXT_PUBLIC_GUEST_LINKS_ENABLED`     | Variable         | `false` | Set to `true` to show the visitor form and enable its endpoint |
+| `NUXT_PUBLIC_GUEST_LINK_PREFIX`      | Variable         | `u`     | Visitor links use `/u/<slug>`                                 |
+| `NUXT_PUBLIC_TURNSTILE_SITE_KEY`     | Variable         | —       | Public Turnstile site key                                     |
+| `NUXT_TURNSTILE_SECRET`              | Encrypted secret | —       | Private Turnstile secret key                                  |
+| `NUXT_GUEST_LINK_DAILY_LIMIT_PER_IP` | Variable         | `10`    | Successful links per IP per UTC day                           |
+| `NUXT_GUEST_LINK_GLOBAL_LIMIT`       | Variable         | `10000` | Maximum active visitor links                                  |
+| `NUXT_GUEST_LINK_EXPIRATION_DAYS`    | Variable         | `180`   | Visitor link lifetime; `0` means no expiry                    |
+| `NUXT_GUEST_LINK_CLEANUP_DAYS`       | Variable         | `7`     | Grace period after expiry before permanent deletion            |
+
+Visitor links are tagged `guest` and remain manageable from the dashboard. Prefix aliases can preserve old links after a prefix change; see [configuration](/configuration/). Cleanup runs on the existing daily Workers cron after KV-to-D1 migration has completed.
+
+For an additional edge safeguard against challenge-verification floods, add a Cloudflare WAF rate limiting rule for `POST /_guest/links`, counted by client IP. The application also enforces its daily IP quota and active-link cap in D1.
+
 Analytics details: [Analytics and Realtime](/features/analytics). Full list: [configuration](/configuration/).
 
 Confirm bindings use the exact names `DB`, `KV`, `ANALYTICS`, `R2`, and `AI`.

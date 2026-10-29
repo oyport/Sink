@@ -3,6 +3,25 @@
     "hero": {
       "github_repo": "Repository GitHub"
     },
+    "guest_links": {
+      "title": "Crea un link breve",
+      "description": "Incolla un URL di destinazione per creare un link breve da condividere.",
+      "url_label": "URL di destinazione",
+      "url_placeholder": "https://example.com",
+      "create": "Crea link breve",
+      "creating": "Creazione…",
+      "complete_challenge": "Completa il controllo di sicurezza per continuare.",
+      "challenge_error": "Impossibile caricare il controllo di sicurezza. Aggiorna la pagina e riprova.",
+      "short_link": "Il tuo link breve",
+      "copy": "Copia link breve",
+      "copied": "Link breve copiato",
+      "copy_failed": "Impossibile copiare il link breve.",
+      "daily_limit": "Hai raggiunto il limite giornaliero di link per questo IP. Riprova domani.",
+      "global_limit": "La capacità globale dei link per visitatori è attualmente esaurita.",
+      "failed": "Impossibile creare il link breve. Riprova.",
+      "expires_in": "Questo link scade tra {days} giorni.",
+      "never_expires": "Questo link non ha scadenza."
+    },
     "features": {
       "title": "Funzionalità",
       "subtitle": "Funzionalità semplici e sufficienti",

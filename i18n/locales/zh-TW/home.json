@@ -3,6 +3,25 @@
     "hero": {
       "github_repo": "GitHub 倉庫"
     },
+    "guest_links": {
+      "title": "訪客產生短連結",
+      "description": "貼上目標網址，即可產生可分享的短連結。",
+      "url_label": "目標網址",
+      "url_placeholder": "https://example.com",
+      "create": "產生短連結",
+      "creating": "正在產生…",
+      "complete_challenge": "請先完成安全驗證。",
+      "challenge_error": "安全驗證載入失敗，請重新整理頁面後再試。",
+      "short_link": "您的短連結",
+      "copy": "複製短連結",
+      "copied": "短連結已複製",
+      "copy_failed": "複製失敗，請手動複製短連結。",
+      "daily_limit": "已達到此 IP 今日的訪客產生上限，請明天再試。",
+      "global_limit": "全站訪客短連結容量已滿，請稍後再試。",
+      "failed": "短連結產生失敗，請重試。",
+      "expires_in": "此短連結將於 {days} 天後過期。",
+      "never_expires": "此短連結不會過期。"
+    },
     "features": {
       "title": "功能特色",
       "subtitle": "簡單而實用的功能",

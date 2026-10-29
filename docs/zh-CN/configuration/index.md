@@ -69,7 +69,7 @@ description: Sink 支持的全部环境变量——做什么、填在哪、什�
 
 ## 公开覆盖值（只在改默认时）
 
-Workers 要在 Builds 和运行时填相同值。Pages 只填一次，然后重新部署。
+Workers 要在 Builds 和运行时填相同值。Pages 只填一次，然后重新部署。游客短链配置通过运行时接口读取，可直接在 Worker Runtime 中修改，无需重新构建页面。
 
 | 变量                              | 默认    | 用途                                                                |
 | --------------------------------- | ------- | ------------------------------------------------------------------- |
@@ -79,8 +79,11 @@ Workers 要在 Builds 和运行时填相同值。Pages 只填一次，然后重�
 | `NUXT_PUBLIC_MAX_URL_LENGTH`      | `16384` | 目标 URL 最大字符数（256-24000）                                    |
 | `NUXT_PUBLIC_HOME_URL`            | 空      | 非空则把 `/` 重定向到该 URL；空则显示 Sink 首页                     |
 | `NUXT_PUBLIC_LINK_PROXY_ENABLED`  | `false` | `true` 时允许链接开启反向代理模式；关闭时存量代理链接回退为普通跳转 |
+| `NUXT_PUBLIC_GUEST_LINKS_ENABLED` | `false` | `true` 时启用经过 Turnstile 验证的游客短链生成                     |
+| `NUXT_PUBLIC_GUEST_LINK_PREFIX`   | `u`     | 游客短链使用 `/<前缀>/<短码>`；默认是 `/u/<短码>`                  |
+| `NUXT_PUBLIC_TURNSTILE_SITE_KEY`  | 空      | Cloudflare Turnstile 站点公钥；启用游客生成时必填                  |
 
-`NUXT_PUBLIC_*` 的值会打进构建出的页面、同时也在运行时读取，所以修改后需要重新构建，客户端才能拿到新值。
+其他 `NUXT_PUBLIC_*` 的值会打进构建出的页面、同时也在运行时读取，所以修改后需要重新构建，客户端才能拿到新值。
 
 `NUXT_HOME_URL` 是 `NUXT_PUBLIC_HOME_URL` 的旧名称，目前仍然有效，建议下次调整配置时改成新名称。
 
@@ -106,14 +109,30 @@ Workers 要在 Builds 和运行时填相同值。Pages 只填一次，然后重�
 | `NUXT_SAFE_BROWSING_DOH`                            | 用于检查不安全域名的 DNS-over-HTTPS 地址（未设置 `unsafe` 时） |
 | `NUXT_WEBHOOK_URL`                                  | [点击 Webhook](./webhooks) 的 HTTP(S) 地址                     |
 | `NUXT_WEBHOOK_SECRET`                               | 可选签名密钥，以 `whsec_` 开头                                 |
+| `NUXT_GUEST_LINK_PREFIX_ALIASES`                    | 逗号分隔的旧游客前缀；更改前缀后保留旧链接                       |
+| `NUXT_GUEST_LINK_DAILY_LIMIT_PER_IP`                 | 每个 IP 每个 UTC 日成功生成上限；默认 `10`                      |
+| `NUXT_GUEST_LINK_GLOBAL_LIMIT`                       | 全站有效游客短链上限；默认 `10000`                              |
+| `NUXT_GUEST_LINK_EXPIRATION_DAYS`                    | 游客短链有效天数；默认 `180`，`0` 表示永不过期                  |
+| `NUXT_GUEST_LINK_CLEANUP_DAYS`                       | 到期后保留几天再删除；默认 `7`，`0` 表示下次定时任务时删除       |
+| `NUXT_TURNSTILE_SECRET`                              | 加密保存的 Turnstile 密钥；启用游客生成时必填                   |
 
 安全浏览示例：Cloudflare Family DNS `https://family.cloudflare-dns.com/dns-query`。另见[链接功能](/zh-CN/features/links)。
 
-### Expired link retention
+### 过期链接保留
 
-Set runtime variable `NUXT_EXPIRED_LINK_RETENTION_DAYS=30` to permanently delete D1 links once they have been expired for 30 days. Unset or empty disables cleanup. Only non-negative integers are accepted; `0` deletes expired links on the next run. Invalid values skip cleanup and log a warning.
+将运行时变量 `NUXT_EXPIRED_LINK_RETENTION_DAYS=30` 设为 30，可在 D1 链接过期 30 天后永久删除。留空或不设置则关闭清理。只接受非负整数；设为 `0` 会在下次运行时删除已过期链接。配置无效时会跳过清理并记录警告。
 
-Cleanup requires a completed KV-to-D1 migration and Workers cron (daily at **00:00 UTC** in this repository). It runs independently of `NUXT_DISABLE_AUTO_BACKUP` and does not require R2. Pages does not run automatic cleanup. Existing R2 backups are retained.
+清理要求 KV 到 D1 迁移已完成，并依赖 Workers 定时任务（本仓库每天 **00:00 UTC** 运行）。它独立于 `NUXT_DISABLE_AUTO_BACKUP`，不需要 R2。Pages 不会自动执行清理，已有 R2 备份会保留。
+
+### 游客短链额度与清理
+
+首页游客生成默认关闭。创建 Cloudflare Turnstile 组件后，设置 `NUXT_PUBLIC_TURNSTILE_SITE_KEY` 和加密保存的 `NUXT_TURNSTILE_SECRET`，再设置 `NUXT_PUBLIC_GUEST_LINKS_ENABLED=true`。服务端会在创建短链前验证 Turnstile。游客短链使用可配置的 `/u/` 路径段，并自动添加 `guest` 标签，可在后台统一管理。站点公钥可以公开；密钥必须加密保存。
+
+`NUXT_GUEST_LINK_DAILY_LIMIT_PER_IP=10` 限制每个客户端 IP 每个 UTC 日成功生成的数量。IP 只以带密钥的每日哈希保存。`NUXT_GUEST_LINK_GLOBAL_LIMIT=10000` 限制全站有效游客短链数量；链接过期后会释放额度。默认值适合先行启用，再按访问量调整。
+
+`NUXT_GUEST_LINK_EXPIRATION_DAYS=180` 设置新游客短链的默认有效期；设为 `0` 表示不设置到期时间。`NUXT_GUEST_LINK_CLEANUP_DAYS=7` 设置过期后保留多久再永久删除。清理使用现有 Workers 定时任务，并要求 KV 到 D1 迁移已完成。Pages 部署没有定时清理任务。通用配置 `NUXT_EXPIRED_LINK_RETENTION_DAYS` 与此项独立，仍会作用于所有过期链接。
+
+修改 `NUXT_PUBLIC_GUEST_LINK_PREFIX` 后，请把旧值加入 `NUXT_GUEST_LINK_PREFIX_ALIASES`，已分享的游客链接才能继续使用。前缀必须是单段字母、数字或连字符，且不能占用应用保留路径。
 
 ## 高级默认值（通常不用改）
 

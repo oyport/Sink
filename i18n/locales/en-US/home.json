@@ -3,6 +3,25 @@
     "hero": {
       "github_repo": "GitHub Repo"
     },
+    "guest_links": {
+      "title": "Create a short link",
+      "description": "Paste a destination URL to create a shareable short link.",
+      "url_label": "Destination URL",
+      "url_placeholder": "https://example.com",
+      "create": "Create short link",
+      "creating": "Creating…",
+      "complete_challenge": "Complete the security check to continue.",
+      "challenge_error": "The security check could not load. Please refresh and try again.",
+      "short_link": "Your short link",
+      "copy": "Copy short link",
+      "copied": "Short link copied",
+      "copy_failed": "Could not copy the short link.",
+      "daily_limit": "You have reached today's visitor link limit. Try again tomorrow.",
+      "global_limit": "Visitor link capacity is currently full.",
+      "failed": "Could not create a short link. Please try again.",
+      "expires_in": "This link expires in {days} days.",
+      "never_expires": "This link does not expire."
+    },
     "features": {
       "title": "Features",
       "subtitle": "Simple and sufficient functionality",

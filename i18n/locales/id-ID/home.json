@@ -3,6 +3,25 @@
     "hero": {
       "github_repo": "Repositori GitHub"
     },
+    "guest_links": {
+      "title": "Buat tautan pendek",
+      "description": "Tempel URL tujuan untuk membuat tautan pendek yang dapat dibagikan.",
+      "url_label": "URL tujuan",
+      "url_placeholder": "https://example.com",
+      "create": "Buat tautan pendek",
+      "creating": "Membuat…",
+      "complete_challenge": "Selesaikan pemeriksaan keamanan untuk melanjutkan.",
+      "challenge_error": "Pemeriksaan keamanan gagal dimuat. Muat ulang halaman lalu coba lagi.",
+      "short_link": "Tautan pendek Anda",
+      "copy": "Salin tautan pendek",
+      "copied": "Tautan pendek disalin",
+      "copy_failed": "Tautan pendek tidak dapat disalin.",
+      "daily_limit": "Batas tautan pengunjung hari ini telah tercapai. Coba lagi besok.",
+      "global_limit": "Kapasitas tautan pengunjung sedang penuh.",
+      "failed": "Tautan pendek gagal dibuat. Silakan coba lagi.",
+      "expires_in": "Tautan ini kedaluwarsa dalam {days} hari.",
+      "never_expires": "Tautan ini tidak kedaluwarsa."
+    },
     "features": {
       "title": "Fitur",
       "subtitle": "Fungsi sederhana dan cukup",

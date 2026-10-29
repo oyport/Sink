@@ -66,3 +66,18 @@ export const linkMigrationRuns = sqliteTable('link_migration_runs', {
     sql`${table.id} desc`,
   ),
 ])
+
+export const guestLinkUsage = sqliteTable('guest_link_usage', {
+  id: text().primaryKey(),
+  slug: text().notNull(),
+  linkId: text('link_id').notNull(),
+  ipHash: text('ip_hash').notNull(),
+  createdAt: integer('created_at').notNull(),
+  status: text({ enum: ['pending', 'created'] }).notNull(),
+  reservationExpiresAt: integer('reservation_expires_at'),
+}, table => [
+  index('guest_link_usage_ip_created_at_idx').on(table.ipHash, table.createdAt),
+  index('guest_link_usage_created_at_idx').on(table.createdAt),
+  index('guest_link_usage_status_reservation_expires_at_idx').on(table.status, table.reservationExpiresAt),
+  index('guest_link_usage_slug_idx').on(table.slug),
+])

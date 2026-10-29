@@ -3,6 +3,25 @@
     "hero": {
       "github_repo": "GitHub 仓库"
     },
+    "guest_links": {
+      "title": "游客生成短链接",
+      "description": "粘贴目标网址，即可生成可分享的短链接。",
+      "url_label": "目标网址",
+      "url_placeholder": "https://example.com",
+      "create": "生成短链接",
+      "creating": "正在生成…",
+      "complete_challenge": "请先完成安全验证。",
+      "challenge_error": "安全验证加载失败，请刷新页面后重试。",
+      "short_link": "您的短链接",
+      "copy": "复制短链接",
+      "copied": "短链接已复制",
+      "copy_failed": "复制失败，请手动复制短链接。",
+      "daily_limit": "已达到此 IP 今日的游客生成上限，请明天再试。",
+      "global_limit": "全站游客短链容量已满，请稍后再试。",
+      "failed": "短链接生成失败，请重试。",
+      "expires_in": "此短链接将在 {days} 天后过期。",
+      "never_expires": "此短链接不会过期。"
+    },
     "features": {
       "title": "功能特点",
       "subtitle": "简单而实用的功能",

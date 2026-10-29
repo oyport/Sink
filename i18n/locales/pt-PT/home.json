@@ -3,6 +3,25 @@
     "hero": {
       "github_repo": "Repositório GitHub"
     },
+    "guest_links": {
+      "title": "Criar um link curto",
+      "description": "Cole um URL de destino para criar um link curto partilhável.",
+      "url_label": "URL de destino",
+      "url_placeholder": "https://example.com",
+      "create": "Criar link curto",
+      "creating": "A criar…",
+      "complete_challenge": "Conclua a verificação de segurança para continuar.",
+      "challenge_error": "Não foi possível carregar a verificação de segurança. Atualize a página e tente novamente.",
+      "short_link": "O seu link curto",
+      "copy": "Copiar link curto",
+      "copied": "Link curto copiado",
+      "copy_failed": "Não foi possível copiar o link curto.",
+      "daily_limit": "Atingiu o limite diário de links para este IP. Tente novamente amanhã.",
+      "global_limit": "A capacidade global de links de visitante está esgotada.",
+      "failed": "Não foi possível criar o link curto. Tente novamente.",
+      "expires_in": "Este link expira dentro de {days} dias.",
+      "never_expires": "Este link não expira."
+    },
     "features": {
       "title": "Funcionalidades",
       "subtitle": "Funcionalidade simples e suficiente",

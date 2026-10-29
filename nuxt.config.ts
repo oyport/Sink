@@ -36,6 +36,12 @@ export default defineNuxtConfig({
     disableBotAccessLog: false,
     disableAutoBackup: false,
     expiredLinkRetentionDays: '',
+    guestLinkDailyLimitPerIp: '10',
+    guestLinkGlobalLimit: '10000',
+    guestLinkExpirationDays: '180',
+    guestLinkCleanupDays: '7',
+    guestLinkPrefixAliases: '',
+    turnstileSecret: '',
     notFoundRedirect: '',
     safeBrowsingDoh: '', // Set to DoH URL to enable auto-detection, e.g. https://family.cloudflare-dns.com/dns-query
     webhookUrl: '',
@@ -47,6 +53,9 @@ export default defineNuxtConfig({
       maxUrlLength: '16384',
       homeURL: process.env.NUXT_HOME_URL || '',
       linkProxyEnabled: false,
+      guestLinksEnabled: false,
+      guestLinkPrefix: 'u',
+      turnstileSiteKey: '',
     },
   },
   routeRules: {

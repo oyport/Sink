@@ -3,6 +3,25 @@
     "hero": {
       "github_repo": "GitHub-Repository"
     },
+    "guest_links": {
+      "title": "Kurzlink erstellen",
+      "description": "Fügen Sie eine Ziel-URL ein, um einen teilbaren Kurzlink zu erstellen.",
+      "url_label": "Ziel-URL",
+      "url_placeholder": "https://example.com",
+      "create": "Kurzlink erstellen",
+      "creating": "Wird erstellt…",
+      "complete_challenge": "Schließen Sie die Sicherheitsprüfung ab, um fortzufahren.",
+      "challenge_error": "Die Sicherheitsprüfung konnte nicht geladen werden. Aktualisieren Sie die Seite und versuchen Sie es erneut.",
+      "short_link": "Ihr Kurzlink",
+      "copy": "Kurzlink kopieren",
+      "copied": "Kurzlink kopiert",
+      "copy_failed": "Der Kurzlink konnte nicht kopiert werden.",
+      "daily_limit": "Das tägliche Besucherkontingent für diese IP ist erreicht. Versuchen Sie es morgen erneut.",
+      "global_limit": "Das Kontingent für Besucherlinks ist derzeit ausgeschöpft.",
+      "failed": "Der Kurzlink konnte nicht erstellt werden. Versuchen Sie es erneut.",
+      "expires_in": "Dieser Link läuft in {days} Tagen ab.",
+      "never_expires": "Dieser Link läuft nicht ab."
+    },
     "features": {
       "title": "Funktionen",
       "subtitle": "Einfache und effektive Funktionalität.",

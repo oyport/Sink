@@ -53,6 +53,23 @@ description: 通过 Git 集成将 Sink 部署到 Cloudflare Workers。
 | `NUXT_CF_ACCOUNT_ID` | 变量     | 访问分析推荐                                                       |
 | `NUXT_CF_API_TOKEN`  | 加密密钥 | 访问分析推荐                                                       |
 
+如需启用首页游客短链，请先为域名创建 [Cloudflare Turnstile 组件](https://developers.cloudflare.com/turnstile/get-started/)，再添加以下**运行时变量和密钥**：
+
+| 变量                                      | 类型     | 默认值  | 用途                                    |
+| ----------------------------------------- | -------- | ------- | --------------------------------------- |
+| `NUXT_PUBLIC_GUEST_LINKS_ENABLED`         | 变量     | `false` | 设为 `true` 后显示游客表单并开放接口    |
+| `NUXT_PUBLIC_GUEST_LINK_PREFIX`          | 变量     | `u`     | 游客短链格式为 `/u/<短码>`              |
+| `NUXT_PUBLIC_TURNSTILE_SITE_KEY`         | 变量     | —       | Turnstile 站点公钥                      |
+| `NUXT_TURNSTILE_SECRET`                  | 加密密钥 | —       | Turnstile 私钥                          |
+| `NUXT_GUEST_LINK_DAILY_LIMIT_PER_IP`     | 变量     | `10`    | 每个 IP 每个 UTC 日成功生成数量         |
+| `NUXT_GUEST_LINK_GLOBAL_LIMIT`           | 变量     | `10000` | 全站有效游客短链上限                    |
+| `NUXT_GUEST_LINK_EXPIRATION_DAYS`        | 变量     | `180`   | 游客短链有效天数；`0` 表示不设到期时间  |
+| `NUXT_GUEST_LINK_CLEANUP_DAYS`           | 变量     | `7`     | 到期后保留天数，再永久删除              |
+
+游客短链会自动加上 `guest` 标签，可在后台统一管理。更改前缀后可配置旧前缀别名以保留已分享链接，详见[配置参考](/zh-CN/configuration/)。KV 到 D1 迁移完成后，清理由现有 Workers 每日定时任务执行。
+
+还可在 Cloudflare WAF 中为 `POST /_guest/links` 添加按客户端 IP 计数的限速规则，降低验证接口遭到请求洪泛的风险。应用本身也会在 D1 中执行每日 IP 配额和全站有效游客短链上限。
+
 访问分析细节见[访问分析与近实时视图](/zh-CN/features/analytics)。完整列表见[配置参考](/zh-CN/configuration/)。
 
 确认绑定名称正好是 `DB`、`KV`、`ANALYTICS`、`R2`、`AI`。

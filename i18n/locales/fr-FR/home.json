@@ -3,6 +3,25 @@
     "hero": {
       "github_repo": "Dépôt GitHub"
     },
+    "guest_links": {
+      "title": "Créer un lien court",
+      "description": "Collez une URL de destination pour créer un lien court à partager.",
+      "url_label": "URL de destination",
+      "url_placeholder": "https://example.com",
+      "create": "Créer le lien court",
+      "creating": "Création…",
+      "complete_challenge": "Terminez le contrôle de sécurité pour continuer.",
+      "challenge_error": "Le contrôle de sécurité ne s’est pas chargé. Actualisez la page et réessayez.",
+      "short_link": "Votre lien court",
+      "copy": "Copier le lien court",
+      "copied": "Lien court copié",
+      "copy_failed": "Impossible de copier le lien court.",
+      "daily_limit": "Vous avez atteint la limite quotidienne de liens visiteurs. Réessayez demain.",
+      "global_limit": "La capacité des liens visiteurs est actuellement atteinte.",
+      "failed": "Impossible de créer le lien court. Réessayez.",
+      "expires_in": "Ce lien expire dans {days} jours.",
+      "never_expires": "Ce lien n’expire pas."
+    },
     "features": {
       "title": "Fonctionnalités",
       "subtitle": "Fonctionnalité simple et adéquate",
