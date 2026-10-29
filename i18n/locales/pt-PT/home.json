@@ -4,6 +4,12 @@
       "github_repo": "Repositório GitHub"
     },
     "guest_links": {
+      "page_eyebrow": "SEM INICIAR SESSÃO",
+      "page_heading": "Partilhe links de forma mais simples.",
+      "page_description": "Cole o URL de destino para criar, em segundos, um link curto para partilhar. Não precisa de conta.",
+      "loading": "A preparar o criador de links…",
+      "unavailable": "A criação de links sem iniciar sessão está indisponível neste momento.",
+      "unavailable_description": "Tente novamente mais tarde.",
       "title": "Criar um link curto",
       "description": "Cole um URL de destino para criar um link curto partilhável.",
       "url_label": "URL de destino",

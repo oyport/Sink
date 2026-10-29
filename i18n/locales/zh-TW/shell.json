@@ -18,6 +18,7 @@
     "links": {
       "documentation": "文件",
       "api_reference": "API 參考",
+      "guest_link_creation": "免登入建立短連結",
       "documentation_aria_label": "開啟 Sink 文件（在新分頁中開啟）",
       "resources_aria_label": "資源",
       "skip_to_content": "跳到主要內容",

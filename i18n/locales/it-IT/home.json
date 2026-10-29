@@ -4,6 +4,12 @@
       "github_repo": "Repository GitHub"
     },
     "guest_links": {
+      "page_eyebrow": "SENZA ACCESSO",
+      "page_heading": "Condividi i link in modo più semplice.",
+      "page_description": "Incolla l’URL di destinazione per creare in pochi secondi un link breve da condividere. Non serve un account.",
+      "loading": "Preparazione del generatore di link…",
+      "unavailable": "La creazione di link senza accesso non è al momento disponibile.",
+      "unavailable_description": "Riprova più tardi.",
       "title": "Crea un link breve",
       "description": "Incolla un URL di destinazione per creare un link breve da condividere.",
       "url_label": "URL di destinazione",

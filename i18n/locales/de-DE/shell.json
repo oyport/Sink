@@ -18,6 +18,7 @@
     "links": {
       "documentation": "Dokumentation",
       "api_reference": "API-Referenz",
+      "guest_link_creation": "Kurzlink ohne Anmeldung erstellen",
       "documentation_aria_label": "Sink-Dokumentation öffnen (wird in einem neuen Tab geöffnet)",
       "resources_aria_label": "Ressourcen",
       "skip_to_content": "Zum Hauptinhalt springen",

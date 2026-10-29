@@ -18,6 +18,7 @@
     "links": {
       "documentation": "Tài liệu",
       "api_reference": "Tham chiếu API",
+      "guest_link_creation": "Tạo liên kết không cần đăng nhập",
       "documentation_aria_label": "Mở tài liệu Sink (mở trong thẻ mới)",
       "resources_aria_label": "Tài nguyên",
       "skip_to_content": "Chuyển đến nội dung chính",

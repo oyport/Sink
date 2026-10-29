@@ -4,6 +4,12 @@
       "github_repo": "GitHub-Repository"
     },
     "guest_links": {
+      "page_eyebrow": "OHNE ANMELDUNG",
+      "page_heading": "Links einfacher teilen.",
+      "page_description": "Füge eine Ziel-URL ein und erstelle in Sekunden einen teilbaren Kurzlink. Dafür ist kein Konto nötig.",
+      "loading": "Der Link-Generator wird vorbereitet …",
+      "unavailable": "Kurzlinks ohne Anmeldung sind derzeit nicht verfügbar.",
+      "unavailable_description": "Bitte versuche es später erneut.",
       "title": "Kurzlink erstellen",
       "description": "Fügen Sie eine Ziel-URL ein, um einen teilbaren Kurzlink zu erstellen.",
       "url_label": "Ziel-URL",

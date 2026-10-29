@@ -4,6 +4,12 @@
       "github_repo": "Repositório GitHub"
     },
     "guest_links": {
+      "page_eyebrow": "SEM PRECISAR ENTRAR",
+      "page_heading": "Compartilhe links com mais facilidade.",
+      "page_description": "Cole o URL de destino para criar um link curto e compartilhável em segundos. Não é necessário ter uma conta.",
+      "loading": "Preparando o criador de links…",
+      "unavailable": "A criação de links sem entrar está indisponível no momento.",
+      "unavailable_description": "Tente novamente mais tarde.",
       "title": "Criar link curto",
       "description": "Cole uma URL de destino para criar um link curto compartilhável.",
       "url_label": "URL de destino",

@@ -39,7 +39,7 @@ const { title, description } = useAppConfig()
 
           <div
             class="
-              mt-10 flex flex-col items-center justify-center gap-2
+              mt-10 flex flex-col items-center justify-center gap-3
               sm:flex-row
               lg:justify-start
             "
@@ -50,6 +50,18 @@ const { title, description } = useAppConfig()
             >
               <NuxtLink to="/dashboard">
                 <span class="text-nowrap">{{ $t('dashboard.title') }}</span>
+              </NuxtLink>
+            </Button>
+            <Button
+              as-child
+              size="lg"
+              variant="outline"
+            >
+              <NuxtLink
+                to="/guest/create"
+                :title="$t('layouts.links.guest_link_creation')"
+              >
+                <span class="text-nowrap">{{ $t('layouts.links.guest_link_creation') }}</span>
               </NuxtLink>
             </Button>
           </div>

@@ -30,6 +30,7 @@ interface GuestLinkResult {
 const { t } = useI18n()
 const config = shallowRef<GuestLinkConfig>()
 const result = shallowRef<GuestLinkResult>()
+const isConfigLoading = shallowRef(true)
 const errorMessage = shallowRef('')
 const challengeMessage = shallowRef('')
 const challengeToken = shallowRef('')
@@ -166,6 +167,9 @@ onMounted(async () => {
   catch (error) {
     console.error('[guest-links] Could not load public configuration', error)
   }
+  finally {
+    isConfigLoading.value = false
+  }
 })
 
 onUnmounted(() => {
@@ -175,104 +179,128 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section v-if="config?.enabled" class="mx-auto w-full max-w-3xl px-6 pb-16">
-    <Card>
-      <CardHeader>
-        <CardTitle class="flex items-center gap-2">
-          <LinkIcon aria-hidden="true" class="size-5" />
-          {{ $t('home.guest_links.title') }}
-        </CardTitle>
-        <CardDescription>{{ $t('home.guest_links.description') }}</CardDescription>
-      </CardHeader>
-      <CardContent class="space-y-5">
-        <form class="space-y-4" :aria-busy="isSubmitting" @submit="submitForm">
-          <FieldGroup>
-            <Field>
-              <FieldLabel for="guest-link-url">
-                {{ $t('home.guest_links.url_label') }}
-              </FieldLabel>
-              <Input
-                id="guest-link-url"
-                type="url"
-                name="url"
-                autocomplete="url"
-                inputmode="url"
-                required
-                :model-value="form.getFieldValue('url')"
-                :placeholder="$t('home.guest_links.url_placeholder')"
-                :disabled="isSubmitting"
-                @update:model-value="value => form.setFieldValue('url', String(value))"
-              />
-            </Field>
-          </FieldGroup>
-
-          <div ref="challengeContainer" />
-          <p v-if="challengeMessage" class="text-sm text-destructive" role="alert">
-            {{ challengeMessage }}
-          </p>
-
-          <Alert v-if="errorMessage" variant="destructive" role="alert">
-            <AlertCircle aria-hidden="true" class="size-4" />
-            <AlertTitle>{{ errorMessage }}</AlertTitle>
-          </Alert>
-
-          <Button type="submit" :disabled="isSubmitting" :aria-busy="isSubmitting">
-            <LoaderCircle
-              v-if="isSubmitting"
-              aria-hidden="true"
-              class="
-                size-4
-                motion-safe:animate-spin
-              "
+  <Card v-if="config?.enabled" class="w-full">
+    <CardHeader>
+      <CardTitle class="flex items-center gap-2">
+        <LinkIcon aria-hidden="true" class="size-5" />
+        {{ $t('home.guest_links.title') }}
+      </CardTitle>
+      <CardDescription>{{ $t('home.guest_links.description') }}</CardDescription>
+    </CardHeader>
+    <CardContent class="space-y-5">
+      <form class="space-y-4" :aria-busy="isSubmitting" @submit="submitForm">
+        <FieldGroup>
+          <Field>
+            <FieldLabel for="guest-link-url">
+              {{ $t('home.guest_links.url_label') }}
+            </FieldLabel>
+            <Input
+              id="guest-link-url"
+              type="url"
+              name="url"
+              autocomplete="url"
+              inputmode="url"
+              required
+              :model-value="form.getFieldValue('url')"
+              :placeholder="$t('home.guest_links.url_placeholder')"
+              :disabled="isSubmitting"
+              @update:model-value="value => form.setFieldValue('url', String(value))"
             />
-            <LinkIcon v-else aria-hidden="true" class="size-4" />
-            {{ $t(isSubmitting ? 'home.guest_links.creating' : 'home.guest_links.create') }}
-          </Button>
-        </form>
+          </Field>
+        </FieldGroup>
 
-        <div
-          v-if="result"
-          class="
-            flex flex-col gap-3 rounded-lg border bg-muted/30 p-4
-            sm:flex-row sm:items-center sm:justify-between
-          "
-          role="status"
-          aria-live="polite"
-        >
-          <div class="min-w-0 space-y-1">
-            <p class="text-sm font-medium">
-              {{ $t('home.guest_links.short_link') }}
-            </p>
-            <a
-              :href="result.shortLink"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="
-                inline-flex max-w-full items-center gap-1 truncate font-mono
-                text-primary underline underline-offset-4
-              "
-            >
-              {{ result.shortLink }}
-              <ExternalLink aria-hidden="true" class="size-3 shrink-0" />
-            </a>
-            <p class="text-xs text-muted-foreground">
-              {{ config.expirationDays > 0
-                ? $t('home.guest_links.expires_in', { days: config.expirationDays })
-                : $t('home.guest_links.never_expires') }}
-            </p>
-          </div>
-          <Button
-            variant="outline"
-            size="sm"
-            class="shrink-0"
-            :aria-label="$t('home.guest_links.copy')"
-            @click="copyShortLink"
+        <div ref="challengeContainer" />
+        <p v-if="challengeMessage" class="text-sm text-destructive" role="alert">
+          {{ challengeMessage }}
+        </p>
+
+        <Alert v-if="errorMessage" variant="destructive" role="alert">
+          <AlertCircle aria-hidden="true" class="size-4" />
+          <AlertTitle>{{ errorMessage }}</AlertTitle>
+        </Alert>
+
+        <Button type="submit" :disabled="isSubmitting" :aria-busy="isSubmitting">
+          <LoaderCircle
+            v-if="isSubmitting"
+            aria-hidden="true"
+            class="
+              size-4
+              motion-safe:animate-spin
+            "
+          />
+          <LinkIcon v-else aria-hidden="true" class="size-4" />
+          {{ $t(isSubmitting ? 'home.guest_links.creating' : 'home.guest_links.create') }}
+        </Button>
+      </form>
+
+      <div
+        v-if="result"
+        class="
+          flex flex-col gap-3 rounded-lg border bg-muted/30 p-4
+          sm:flex-row sm:items-center sm:justify-between
+        "
+        role="status"
+        aria-live="polite"
+      >
+        <div class="min-w-0 space-y-1">
+          <p class="text-sm font-medium">
+            {{ $t('home.guest_links.short_link') }}
+          </p>
+          <a
+            :href="result.shortLink"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="
+              inline-flex max-w-full items-center gap-1 truncate font-mono
+              text-primary underline underline-offset-4
+            "
           >
-            <Copy aria-hidden="true" class="size-4" />
-            {{ $t('home.guest_links.copy') }}
-          </Button>
+            {{ result.shortLink }}
+            <ExternalLink aria-hidden="true" class="size-3 shrink-0" />
+          </a>
+          <p class="text-xs text-muted-foreground">
+            {{ config.expirationDays > 0
+              ? $t('home.guest_links.expires_in', { days: config.expirationDays })
+              : $t('home.guest_links.never_expires') }}
+          </p>
         </div>
-      </CardContent>
-    </Card>
-  </section>
+        <Button
+          variant="outline"
+          size="sm"
+          class="shrink-0"
+          :aria-label="$t('home.guest_links.copy')"
+          @click="copyShortLink"
+        >
+          <Copy aria-hidden="true" class="size-4" />
+          {{ $t('home.guest_links.copy') }}
+        </Button>
+      </div>
+    </CardContent>
+  </Card>
+
+  <Card v-else class="w-full">
+    <CardContent class="flex items-start gap-4">
+      <LoaderCircle
+        v-if="isConfigLoading"
+        aria-hidden="true"
+        class="
+          mt-0.5 size-5 shrink-0 text-muted-foreground
+          motion-safe:animate-spin
+        "
+      />
+      <AlertCircle
+        v-else
+        aria-hidden="true"
+        class="mt-0.5 size-5 shrink-0 text-muted-foreground"
+      />
+      <div class="space-y-1">
+        <p class="font-medium">
+          {{ $t(isConfigLoading ? 'home.guest_links.loading' : 'home.guest_links.unavailable') }}
+        </p>
+        <p v-if="!isConfigLoading" class="text-sm text-muted-foreground">
+          {{ $t('home.guest_links.unavailable_description') }}
+        </p>
+      </div>
+    </CardContent>
+  </Card>
 </template>

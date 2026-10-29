@@ -4,6 +4,12 @@
       "github_repo": "GitHub 仓库"
     },
     "guest_links": {
+      "page_eyebrow": "无需登录",
+      "page_heading": "分享链接，从此更轻松",
+      "page_description": "粘贴目标网址，几秒钟即可生成可分享的短链接，无需注册或登录。",
+      "loading": "正在准备短链创建表单…",
+      "unavailable": "免登录创建短链暂不可用",
+      "unavailable_description": "请稍后再试。",
       "title": "游客生成短链接",
       "description": "粘贴目标网址，即可生成可分享的短链接。",
       "url_label": "目标网址",

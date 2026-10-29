@@ -18,6 +18,7 @@
     "links": {
       "documentation": "文档",
       "api_reference": "API 参考",
+      "guest_link_creation": "免登录创建短链",
       "documentation_aria_label": "打开 Sink 文档（在新标签页中打开）",
       "resources_aria_label": "资源",
       "skip_to_content": "跳到主要内容",

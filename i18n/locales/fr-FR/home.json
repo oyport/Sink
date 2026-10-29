@@ -4,6 +4,12 @@
       "github_repo": "Dépôt GitHub"
     },
     "guest_links": {
+      "page_eyebrow": "SANS CONNEXION",
+      "page_heading": "Partagez vos liens plus simplement.",
+      "page_description": "Collez une URL de destination pour créer en quelques secondes un lien court à partager. Aucun compte n’est nécessaire.",
+      "loading": "Préparation du générateur de liens…",
+      "unavailable": "La création de liens sans connexion est momentanément indisponible.",
+      "unavailable_description": "Veuillez réessayer plus tard.",
       "title": "Créer un lien court",
       "description": "Collez une URL de destination pour créer un lien court à partager.",
       "url_label": "URL de destination",

@@ -18,6 +18,7 @@
     "links": {
       "documentation": "Dokumentasi",
       "api_reference": "Referensi API",
+      "guest_link_creation": "Buat tautan tanpa login",
       "documentation_aria_label": "Buka dokumentasi Sink (terbuka di tab baru)",
       "resources_aria_label": "Sumber daya",
       "skip_to_content": "Lompat ke konten utama",

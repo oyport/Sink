@@ -18,6 +18,7 @@
     "links": {
       "documentation": "문서",
       "api_reference": "API 레퍼런스",
+      "guest_link_creation": "로그인 없이 단축 링크 만들기",
       "documentation_aria_label": "Sink 문서 열기(새 탭에서 열림)",
       "resources_aria_label": "리소스",
       "skip_to_content": "주요 콘텐츠로 건너뛰기",

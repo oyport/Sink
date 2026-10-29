@@ -4,6 +4,12 @@
       "github_repo": "GitHub Repo"
     },
     "guest_links": {
+      "page_eyebrow": "NO SIGN-IN REQUIRED",
+      "page_heading": "A simpler way to share links.",
+      "page_description": "Paste a destination URL to create a short, shareable link in seconds. No account needed.",
+      "loading": "Preparing the link creator…",
+      "unavailable": "Short links without sign-in are unavailable right now.",
+      "unavailable_description": "Please try again later.",
       "title": "Create a short link",
       "description": "Paste a destination URL to create a shareable short link.",
       "url_label": "Destination URL",

@@ -4,6 +4,12 @@
       "github_repo": "Kho GitHub"
     },
     "guest_links": {
+      "page_eyebrow": "KHÔNG CẦN ĐĂNG NHẬP",
+      "page_heading": "Chia sẻ liên kết dễ dàng hơn.",
+      "page_description": "Dán URL đích để tạo liên kết ngắn có thể chia sẻ chỉ trong vài giây. Không cần tài khoản.",
+      "loading": "Đang chuẩn bị công cụ tạo liên kết…",
+      "unavailable": "Hiện không thể tạo liên kết khi chưa đăng nhập.",
+      "unavailable_description": "Vui lòng thử lại sau.",
       "title": "Tạo liên kết rút gọn",
       "description": "Dán URL đích để tạo liên kết rút gọn có thể chia sẻ.",
       "url_label": "URL đích",

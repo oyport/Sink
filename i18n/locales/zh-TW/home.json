@@ -4,6 +4,12 @@
       "github_repo": "GitHub 倉庫"
     },
     "guest_links": {
+      "page_eyebrow": "免登入",
+      "page_heading": "分享連結，從此更輕鬆",
+      "page_description": "貼上目標網址，幾秒鐘即可建立可分享的短連結，無需註冊或登入。",
+      "loading": "正在準備短連結建立表單…",
+      "unavailable": "免登入建立短連結暫時無法使用",
+      "unavailable_description": "請稍後再試。",
       "title": "訪客產生短連結",
       "description": "貼上目標網址，即可產生可分享的短連結。",
       "url_label": "目標網址",

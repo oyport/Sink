@@ -4,6 +4,12 @@
       "github_repo": "Repositori GitHub"
     },
     "guest_links": {
+      "page_eyebrow": "TANPA LOGIN",
+      "page_heading": "Bagikan tautan dengan lebih mudah.",
+      "page_description": "Tempel URL tujuan untuk membuat tautan pendek yang mudah dibagikan dalam hitungan detik. Tanpa akun.",
+      "loading": "Menyiapkan pembuat tautan…",
+      "unavailable": "Pembuatan tautan tanpa login sedang tidak tersedia.",
+      "unavailable_description": "Silakan coba lagi nanti.",
       "title": "Buat tautan pendek",
       "description": "Tempel URL tujuan untuk membuat tautan pendek yang dapat dibagikan.",
       "url_label": "URL tujuan",

@@ -4,6 +4,12 @@
       "github_repo": "GitHub 저장소"
     },
     "guest_links": {
+      "page_eyebrow": "로그인 없이 이용",
+      "page_heading": "링크 공유를 더 간편하게.",
+      "page_description": "대상 URL을 붙여넣어 몇 초 만에 공유용 단축 링크를 만드세요. 계정이 필요 없습니다.",
+      "loading": "링크 생성기를 준비하고 있습니다…",
+      "unavailable": "현재 로그인 없이 링크를 만들 수 없습니다.",
+      "unavailable_description": "잠시 후 다시 시도해 주세요.",
       "title": "단축 링크 만들기",
       "description": "대상 URL을 붙여 넣어 공유 가능한 단축 링크를 만드세요.",
       "url_label": "대상 URL",

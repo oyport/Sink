@@ -81,6 +81,16 @@ function closeMobileMenu() {
                 <NavigationMenuList>
                   <NavigationMenuItem>
                     <NavigationMenuLink as-child>
+                      <NuxtLink
+                        to="/guest/create"
+                        :title="$t('layouts.links.guest_link_creation')"
+                      >
+                        {{ $t('layouts.links.guest_link_creation') }}
+                      </NuxtLink>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <NavigationMenuLink as-child>
                       <a
                         href="/_docs/scalar"
                         target="_blank"
@@ -141,6 +151,18 @@ function closeMobileMenu() {
                   "
                 >
                   <nav class="flex flex-col gap-1">
+                    <NuxtLink
+                      to="/guest/create"
+                      :title="$t('layouts.links.guest_link_creation')"
+                      class="
+                        flex min-h-11 items-center rounded-xl px-3 text-sm
+                        font-medium text-muted-foreground transition-colors
+                        hover:bg-muted hover:text-foreground
+                      "
+                      @click="closeMobileMenu"
+                    >
+                      {{ $t('layouts.links.guest_link_creation') }}
+                    </NuxtLink>
                     <a
                       href="/_docs/scalar"
                       target="_blank"

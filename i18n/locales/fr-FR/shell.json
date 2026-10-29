@@ -18,6 +18,7 @@
     "links": {
       "documentation": "Documentation",
       "api_reference": "Référence API",
+      "guest_link_creation": "Créer un lien court",
       "documentation_aria_label": "Ouvrir la documentation de Sink (nouvel onglet)",
       "resources_aria_label": "Ressources",
       "skip_to_content": "Aller au contenu principal",

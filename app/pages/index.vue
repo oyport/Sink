@@ -5,7 +5,6 @@
     "
   >
     <HomeHero />
-    <HomeGuestLinkForm />
     <HomeLogos />
     <HomeFeatures />
   </div>

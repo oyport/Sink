@@ -21,6 +21,9 @@ interface TurnstileValidationResponse {
   action?: string
 }
 
+const GUEST_SLUG_INITIAL_LENGTH = 2
+const MAX_GUEST_SLUG_ATTEMPTS = 12
+
 async function verifyTurnstile(event: H3Event, token: string, secret: string, ip: string): Promise<boolean> {
   const requestUrl = getRequestURL(event)
   const response = await $fetch<TurnstileValidationResponse>(
@@ -101,15 +104,14 @@ export default eventHandler(async (event) => {
   const dayStart = utcDayStart(now)
   const ipHash = await hashGuestIp(event, ip, dayStart)
   const expiration = settings.expirationDays > 0 ? now + settings.expirationDays * 86_400 : undefined
-  const generateSlug = nanoid()
   const generateId = nanoid(10)
   const generateReservationId = nanoid(16)
   const reservationExpiresAt = now + 120
 
-  for (let attempt = 0; attempt < 5; attempt++) {
+  for (let attempt = 0; attempt < MAX_GUEST_SLUG_ATTEMPTS; attempt++) {
     const link = CreateLinkSchema.parse({
       url,
-      slug: generateSlug(),
+      slug: nanoid(GUEST_SLUG_INITIAL_LENGTH + attempt)(),
       id: generateId(),
       createdAt: now,
       updatedAt: now,
